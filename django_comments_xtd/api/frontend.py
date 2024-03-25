@@ -97,7 +97,7 @@ class CommentBoxDriver(object):
             "request_name": False,
             "request_email_address": False,
             "is_authenticated": False,
-            "who_can_post": options['who_can_post'],
+            "who_can_post": 'all',
             "allow_flagging": False,
             "allow_feedback": False,
             "show_feedback": False,
@@ -142,6 +142,9 @@ class CommentBoxDriver(object):
             d['login_url'] = settings.LOGIN_URL
             d['like_url'] = reverse("comments-xtd-like", args=(0,))
             d['dislike_url'] = reverse("comments-xtd-dislike", args=(0,))
+
+        # apply options possibly defined in COMMENTS_XTD_APP_MODEL_OPTIONS
+        d.update(options)
 
         return d
 
